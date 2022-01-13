@@ -49,11 +49,7 @@ function App() {
       });
     });
   }, [genres?.selectedGenre, spotify?.ClientId, spotify?.ClientSecret]);
-  useEffect(() => {}, [
-    genres?.selectedGenre,
-    spotify?.ClientId,
-    spotify?.ClientSecret,
-  ]);
+  
 
   const genreChanged = (value) => {
     setGenres({
