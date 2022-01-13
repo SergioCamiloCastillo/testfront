@@ -42,8 +42,8 @@ function App() {
     });
     getGenres(token).then((newGenres) => {
       setGenres({
-        selectedGenre: genres.selectedGenre,
-        listOfGenresFromAPI: newGenres.categories?.items,
+        selectedGenre: genres?.selectedGenre,
+        listOfGenresFromAPI: newGenres?.categories?.items,
       });
     });
   }, [genres?.selectedGenre, spotify?.ClientId, spotify?.ClientSecret]);
