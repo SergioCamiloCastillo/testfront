@@ -46,7 +46,7 @@ function App() {
         listOfGenresFromAPI: newGenres?.categories?.items,
       });
     });
-  }, [genres?.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+  }, [genres?.selectedGenre, spotify?.ClientId, spotify?.ClientSecret]);
   const genreChanged = (value) => {
     setGenres({
       selectedValue: value,

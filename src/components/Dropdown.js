@@ -9,7 +9,7 @@ const Dropdown = (props) => {
   return (
     <div>
       <select
-        value={props.selectValue}
+        value={props?.selectValue}
         onChange={(e) => {
           setSelectValue(e.target.value);
         }}
