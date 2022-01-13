@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import Dropdown from "./components/Dropdown";
 import "./scss/index.scss";
 import { Credentials } from "./helpers/credentials";
