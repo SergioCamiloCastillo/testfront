@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 
 const CardTrack = (tracks) => {
-  console.log("cliente id",process.env.CLIENTID);
   const settings = {
     dots: true,
     infinite: true,
