@@ -1,8 +1,8 @@
 const Credentials = () => {
 
     return {
-        ClientId: '95ee6961e7344b9bb41360282f23e071',
-        ClientSecret: '7d4b13430731479ca2c1ade47fa54e8d'
+        ClientId: 'be2b11f345964e9fb20980d16445a6c2',
+        ClientSecret: 'c52c76ed23644c67b0208445d4f0d6c9'
     }
 }
 

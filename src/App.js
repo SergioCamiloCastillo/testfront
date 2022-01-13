@@ -17,7 +17,7 @@ import {
   Container,
   Button,
   Grid,
-  Table
+  Table,
 } from "semantic-ui-react";
 function App() {
   const [token, setToken] = useState("");
@@ -36,17 +36,25 @@ function App() {
 
   const spotify = Credentials();
 
-  useEffect(() => {
+  useEffect(async () => {
     getToken().then((newToken) => {
       setToken(newToken.access_token);
-    });
-    getGenres(token).then((newGenres) => {
-      setGenres({
-        selectedGenre: genres?.selectedGenre,
-        listOfGenresFromAPI: newGenres?.categories?.items,
+
+      getGenres(newToken.access_token).then((newGenres) => {
+          console.log("nuevos generos", token);
+          setGenres({
+            selectedGenre: genres?.selectedGenre,
+            listOfGenresFromAPI: newGenres?.categories?.items,
+          });
       });
     });
   }, [genres?.selectedGenre, spotify?.ClientId, spotify?.ClientSecret]);
+  useEffect(() => {}, [
+    genres?.selectedGenre,
+    spotify?.ClientId,
+    spotify?.ClientSecret,
+  ]);
+
   const genreChanged = (value) => {
     setGenres({
       selectedValue: value,
@@ -76,7 +84,7 @@ function App() {
   };
   return (
     <div className="home">
-      <Container >
+      <Container>
         <Sidebar.Pushable as={Segment} style={{ overflow: "hidden" }}>
           <Sidebar
             as={Menu}
@@ -160,7 +168,7 @@ function App() {
                   </p>
                 </Grid.Column>
               </Grid>
-             
+
               {tracks?.listOfTracksFromAPI?.length > 0 && (
                 <CardTrack tracks={tracks?.listOfTracksFromAPI} />
               )}
