@@ -7,6 +7,8 @@ import { getGenres } from "./api/genres";
 import { getPlayList } from "./api/playlist";
 import { getTracks } from "./api/tracks";
 import CardTrack from "./components/CardTrack";
+import axios from 'axios';
+
 import {
   Header,
   Icon,
@@ -37,16 +39,32 @@ function App() {
   const spotify = Credentials();
 
   useEffect(() => {
-    getToken().then((newToken) => {
-      setToken(newToken.access_token);
-    });
-    getGenres(token).then((newGenres) => {
-      setGenres({
-        selectedGenre: genres?.selectedGenre,
-        listOfGenresFromAPI: newGenres?.categories?.items,
+
+    axios('https://accounts.spotify.com/api/token', {
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Authorization' : 'Basic ' + btoa(spotify.ClientId + ':' + spotify.ClientSecret)      
+      },
+      data: 'grant_type=client_credentials',
+      method: 'POST'
+    })
+    .then(tokenResponse => {      
+      setToken(tokenResponse.data.access_token);
+
+      axios('https://api.spotify.com/v1/browse/categories?locale=sv_US', {
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer ' + tokenResponse.data.access_token}
+      })
+      .then (genreResponse => {        
+        setGenres({
+          selectedGenre: genres.selectedGenre,
+          listOfGenresFromAPI: genreResponse.data.categories.items
+        })
       });
+      
     });
-  }, [genres?.selectedGenre, spotify?.ClientId, spotify?.ClientSecret]);
+
+  }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]); 
   const genreChanged = (value) => {
     setGenres({
       selectedValue: value,
