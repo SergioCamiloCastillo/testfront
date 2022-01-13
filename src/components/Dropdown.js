@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 const Dropdown = (props) => {
+  
   const [selectValue, setSelectValue] = useState("");
   const dropdownChanged = (e) => {
-    console.log(e.target.value);
     props.changed(e.target.value);
   };
   return (
@@ -14,14 +14,16 @@ const Dropdown = (props) => {
           setSelectValue(e.target.value);
         }}
         onChange={dropdownChanged}
+        className="select-genres"
+        placeholder="Seleccione Género"
       >
-        {props.options.map((item) => (
-          <option key={item.value} value={item.id}>
+        <option readOnly>Seleccione opcion</option>
+        {props?.options?.map((item) => (
+          <option key={item.name} value={item.id}>
             {item.name}
           </option>
         ))}
       </select>
-      <p>{selectValue}</p>
     </div>
   );
 };

@@ -19,7 +19,6 @@ export function getToken() {
       return response.json();
     })
     .then((result) => {
-      console.log("el segundo", result);
       return result;
     })
     .catch((err) => {
